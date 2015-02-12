@@ -19,7 +19,7 @@
 		<form ng-submit="finishInput()" ng-show="nowInput">
 			<label class="item-input-wrapper">
 				<i class="icon ion-search placeholder-icon"></i>
-				<input type="search" placeholder="Search" ng-model="keyword">
+				<input type="search" placeholder="Search" ng-model="keyword" auto-focus="{{nowInput}}">
 			</label>
 		</form>
 		<span class="title" style="font-size: 150%; font-weight: bold;" ng-hide="nowInput">Wikipedia Search</span>
@@ -27,7 +27,7 @@
 			<i class="icon ion-search"></i>
 		</button>
 	</ion-header-bar>
-	<div class="bar bar-subheader" ng-show="results">
+	<div class="bar bar-subheader bar-calm" ng-show="results">
 		<span class="title" style="font-size: 150%">"{{keyword}}"の検索結果{{results.length}}件</span>
 	</div>
 	<ion-content ng-class="{'has-subheader': results}">
@@ -40,6 +40,7 @@
 	<script id="detail.html" type="text/ng-template">
 		<ion-modal-view>
 			<ion-header-bar>
+			<span class="button icon-left ion-chevron-left button-clear button-dark" ng-click="closeModal()">Back</span>
 				<span class="title" style="font-size: 150%; font-weight: bold;">
 					詳細
 				</span>
@@ -47,12 +48,15 @@
 			<ion-content>
 				<div class="list card">
 					<div class="item">
-						{{selectedResult.title}}
+						<b>{{selectedResult.title}}</b>
 					</div>
-					<div class="item item-text-wrap">
+					<div class="item item-body">
 						<p ng-repeat="body in bodyArr">
 							{{body}}
 						</p>
+					</div>
+					<div class="item">
+						<a ng-href="{{selectedResult.url}}">{{selectedResult.url}}</a>
 					</div>
 				</div>
 			</ion-content>

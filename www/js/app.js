@@ -39,3 +39,16 @@ module.controller("detailCtrl", ["$scope", "$ionicModal", function($scope, $ioni
 		$scope.modal.hide();
 	};
 }]);
+
+module.directive("autoFocus", function($timeout) {
+	return function(scope, element, attrs) {
+		attrs.$observe("autoFocus", function(newValue) {
+			if(newValue === "true") {
+				$timeout(function() {
+					element[0].select()
+					element[0].focus();
+				});
+			}
+		})
+	};
+});
